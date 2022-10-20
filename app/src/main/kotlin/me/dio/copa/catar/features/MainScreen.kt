@@ -95,7 +95,7 @@ fun Teams(match: MatchDomain) {
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        TeamItem(team = match.team1)
+        TeamItemHome(team = match.team1)
 
         Text(
             text = "x",
@@ -103,12 +103,38 @@ fun Teams(match: MatchDomain) {
             style = MaterialTheme.typography.h6.copy(color = Color.White)
         )
 
-        TeamItem(team = match.team2)
+        TeamItemAway(team = match.team2)
     }
 }
 
 @Composable
-fun TeamItem(team: TeamDomain) {
+fun TeamItemHome(team: TeamDomain) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TeamItemFlag(team)
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        TeamItemName(team)
+    }
+}
+
+@Composable
+fun TeamItemAway(team: TeamDomain) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TeamItemName(team)
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        TeamItemFlag(team)
+    }
+}
+
+@Composable
+fun TeamItemFlag(team: TeamDomain) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -116,10 +142,15 @@ fun TeamItem(team: TeamDomain) {
             text = team.flag,
             modifier = Modifier.align(Alignment.CenterVertically),
             style = MaterialTheme.typography.h3.copy(color = Color.White)
-            )
+        )
+    }
+}
 
-        Spacer(modifier = Modifier.size(16.dp))
-
+@Composable
+fun TeamItemName(team: TeamDomain) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Text(
             text = team.displayName,
             textAlign =  TextAlign.Center,
